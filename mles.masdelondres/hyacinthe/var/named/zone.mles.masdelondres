@@ -9,8 +9,11 @@ $ORIGIN mles.masdelondres.
 					1W		; expiry
 					1D )	; minimum
   IN NS	hyacinthe.mles.masdelondres.
-hyacinthe       IN A 192.168.2.1
-slackeee        IN A 192.168.2.2
-WinDesk         IN A 192.168.2.3
-slackware.hyacinthe IN A 192.168.2.1
-freebsd.hyacinthe IN A 192.168.2.1
+hyacinthe                          IN A 192.168.2.1
+slackeee                           IN A 192.168.2.2
+WinDesk                            IN A 192.168.2.3
+slackware.hyacinthe                IN A 192.168.2.1
+freebsd.hyacinthe                  IN A 192.168.2.1
+phpinfo.hyacinthe                  IN A 192.168.2.1
+wordpress.hyacinthe                IN A 192.168.2.1
+cmsmadesimple.hyacinthe            IN A 192.168.2.1

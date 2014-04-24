@@ -13,10 +13,14 @@
 
 # For loopbacking.
 127.0.0.1	    	localhost.localdomain localhost
-#192.168.1.254   hyacinthe.mles.masdelondres hyacinthe
-#192.168.2.1     hyacinthe.mles.masdelondres hyacinthe
+192.168.1.254   hyacinthe.mles.masdelondres hyacinthe
+192.168.2.1     hyacinthe.mles.masdelondres hyacinthe
 192.168.2.1     slackware.hyacinthe.mles.masdelondres slackware.hyacinthe
 192.168.2.1     freebsd.hyacinthe.mles.masdelondres freebsd.hyacinthe
+192.168.2.1     phpinfo.hyacinthe.mles.masdelondres phpinfo.hyacinthe
+192.168.2.1     wordpress.hyacinthe.mles.masdelondres wordpress.hyacinthe
+192.168.2.1     cmsmadesimple.hyacinthe.mles.masdelondres cmsmadesimple.hyacinthe
+192.168.2.1     dolibarr.hyacinthe.mles.masdelondres dolibarr.hyacinthe
 # End of hosts.
 
 

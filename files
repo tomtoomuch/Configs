@@ -11,6 +11,9 @@
 # Réseau
 /etc/HOSTNAME
 /etc/hosts
+/etc/hosts.allow
+/etc/hosts.deny
+/etc/hosts.equiv
 /etc/rc.d/rc.inet1.conf
 /etc/resolv.conf
 
