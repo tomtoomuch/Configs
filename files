@@ -16,6 +16,8 @@
 /etc/hosts.equiv
 /etc/rc.d/rc.inet1.conf
 /etc/resolv.conf
+/etc/rc.d/rc.firewall
+/etc/rc.d/rc.ip_forward
 
 # Services supplémentaires à lancer au démarrage
 /etc/rc.d/rc.local
@@ -32,3 +34,20 @@
 /etc/named.conf
 /etc/rc.d/rc.bind
 /var/named/*
+
+# Serveur Apache
+/etc/httpd.conf
+/etc/httpd/extra/httpd-vhosts.conf
+/etc/rc.d/rc.httpd
+
+# Serveur MySQL
+/etc/mysqlaccess.conf
+/etc/rc.d/rc.mysqld
+
+# Serveur FTP
+/etc/vfstpd.conf
+/etc/vfstpd.user_list
+
+# Serveur NTP
+/etc/ntp.conf
+/etc/rc.d/rc.ntpd
