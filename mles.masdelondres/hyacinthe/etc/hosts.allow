@@ -14,5 +14,7 @@ portmap : 192.168.2.0/255.255.255.0 *.mles.masdelondres   : ALLOW
 mountd  : 192.168.2.0/255.255.255.0 *.mles.masdelondres   : ALLOW 
 vsftpd  : 127.0.0.1                                       : ALLOW
 vsftpd  : 192.168.2.0/255.255.255.0 *.mles.masdelondres   : ALLOW
+vsftpd  : ALL                                             : ALLOW
+httpd   : ALL                                             : ALLOW
 # End of hosts.allow.
 
