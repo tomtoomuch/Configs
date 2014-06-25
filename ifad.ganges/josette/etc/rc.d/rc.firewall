@@ -1,0 +1,161 @@
+#!/bin/sh
+#
+# /etc/rc.d/rc.firewall
+
+IPT=$(which iptables)
+MOD=$(which modprobe)
+IFACE_INET=eth0
+IFACE_LAN=eth1
+
+function start {
+  
+  # Default policies
+  $IPT -P INPUT DROP
+  $IPT -P FORWARD ACCEPT
+  $IPT -P OUTPUT ACCEPT
+
+  # Trust ourselves
+  $IPT -A INPUT -i lo -j ACCEPT
+
+  # Ping
+  $IPT -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+  $IPT -A INPUT -p icmp --icmp-type time-exceeded -j ACCEPT
+  $IPT -A INPUT -p icmp --icmp-type destination-unreachable -j ACCEPT
+
+  # Established connections
+  $IPT -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+  # Activer le relais des paquets
+  $IPT -t nat -A POSTROUTING -o $IFACE_INET -s 192.168.2.0/24 -j MASQUERADE
+
+  # Local FTP 
+  # $MOD ip_conntrack_ftp
+  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 21 -j ACCEPT
+
+  # Local SSH 
+  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 22 -j ACCEPT
+
+  # Limited SSH from the outside
+  $IPT -A INPUT -p tcp -i $IFACE_INET --dport 22 -m state --state NEW \
+                -m recent --set --name SSH
+  $IPT -A INPUT -p tcp -i $IFACE_INET --dport 22 -m state --state NEW \
+                -m recent --update --seconds 60 --hitcount 2 --rttl --name SSH -j DROP
+  $IPT -A INPUT -p tcp -i $IFACE_INET --dport 22 -j ACCEPT
+
+  # DNS 
+  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 53 -j ACCEPT
+  $IPT -A INPUT -p udp -i $IFACE_LAN --dport 53 -j ACCEPT
+
+  # DHCP
+  $IPT -A INPUT -p udp -i $IFACE_LAN --dport 67:68 -j ACCEPT
+
+  # HTTP 
+  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 80 -j ACCEPT
+
+  # HTTPS 
+  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 443 -j ACCEPT
+
+  # NTP 
+  $IPT -A INPUT -p udp -i $IFACE_LAN --dport 123 -j ACCEPT
+
+  # Samba 
+  # $IPT -A INPUT -p udp -i $IFACE_LAN --dport 137:138 -j ACCEPT
+  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 139 -j ACCEPT
+  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 445 -j ACCEPT
+
+  # CUPS
+  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 631 -j ACCEPT
+  # $IPT -A INPUT -p udp -i $IFACE_LAN --dport 631 -j ACCEPT
+
+  # NFS
+  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 111 -j ACCEPT
+  # $IPT -A INPUT -p udp -i $IFACE_LAN --dport 111 -j ACCEPT
+  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 2049 -j ACCEPT
+  # $IPT -A INPUT -p udp -i $IFACE_LAN --dport 2049 -j ACCEPT
+  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 32765:32769 -j ACCEPT
+  # $IPT -A INPUT -p udp -i $IFACE_LAN --dport 32765:32769 -j ACCEPT
+
+  # NIS
+  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 834 -j ACCEPT
+  # $IPT -A INPUT -p udp -i $IFACE_LAN --dport 834 -j ACCEPT
+
+  # Squid 
+  #$IPT -A INPUT -p tcp -i $IFACE_LAN --dport 3128 -j ACCEPT
+  #$IPT -A INPUT -p udp -i $IFACE_LAN --dport 3128 -j ACCEPT
+
+  # Transparent proxy : redirect all HTTP requests except those for the server
+  # itself to port 3128
+  # $IPT -A PREROUTING -t nat -i $IFACE_LAN -p tcp ! -d 192.168.2.1 \
+  #               --dport 80 -j REDIRECT --to-port 3128
+
+  # MPD 
+  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 8000 -j ACCEPT
+
+  # Log rejected connections
+  $IPT -A INPUT -j LOG --log-prefix "+++ IPv4 packet rejected +++"
+  $IPT -A INPUT -j REJECT
+  
+}
+
+function stop {
+
+  # Set default policies to ACCEPT everything
+  $IPT -t filter -P INPUT ACCEPT
+  $IPT -t filter -P FORWARD ACCEPT
+  $IPT -t filter -P OUTPUT ACCEPT
+  $IPT -t nat -P PREROUTING ACCEPT
+  $IPT -t nat -P INPUT ACCEPT
+  $IPT -t nat -P OUTPUT ACCEPT
+  $IPT -t nat -P POSTROUTING ACCEPT
+  $IPT -t mangle -P PREROUTING ACCEPT
+  $IPT -t mangle -P INPUT ACCEPT
+  $IPT -t mangle -P FORWARD ACCEPT
+  $IPT -t mangle -P OUTPUT ACCEPT
+  $IPT -t mangle -P POSTROUTING ACCEPT
+
+  # Zero out all counters
+  $IPT -t filter -Z
+  $IPT -t nat -Z
+  $IPT -t mangle -Z
+  
+  # Flush all active rules and delete all custom chains
+  $IPT -t filter -F
+  $IPT -t filter -X
+  $IPT -t nat -F
+  $IPT -t nat -X
+  $IPT -t mangle -F
+  $IPT -t mangle -X
+
+}
+
+# rc.firewall { start | restart | stop | status }
+case $1 in 
+  start)
+    echo ":: Starting firewall."
+    stop
+    start
+    ;;
+  stop)
+    echo ":: Stopping firewall."
+    stop
+    ;;
+  restart)
+    echo ":: Stopping firewall."
+    stop
+    echo ":: Starting firewall."
+    start
+    ;;
+  status)
+    echo
+    echo "=== Filter table ==="
+    echo 
+    $IPT -L -v -n
+    echo
+    echo "==== NAT table ====="
+    echo 
+    $IPT -t nat -L -v -n
+    echo
+  ;;
+  *)
+  echo "Usage: $0 {start|stop|restart|status}"
+esac
