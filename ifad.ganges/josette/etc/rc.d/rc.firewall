@@ -50,10 +50,10 @@ function start {
   $IPT -A INPUT -p udp -i $IFACE_LAN --dport 67:68 -j ACCEPT
 
   # HTTP 
-  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 80 -j ACCEPT
+  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 80 -j ACCEPT
 
   # HTTPS 
-  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 443 -j ACCEPT
+  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 443 -j ACCEPT
 
   # NTP 
   $IPT -A INPUT -p udp -i $IFACE_LAN --dport 123 -j ACCEPT
@@ -80,13 +80,13 @@ function start {
   # $IPT -A INPUT -p udp -i $IFACE_LAN --dport 834 -j ACCEPT
 
   # Squid 
-  #$IPT -A INPUT -p tcp -i $IFACE_LAN --dport 3128 -j ACCEPT
-  #$IPT -A INPUT -p udp -i $IFACE_LAN --dport 3128 -j ACCEPT
+  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 3128 -j ACCEPT
+  $IPT -A INPUT -p udp -i $IFACE_LAN --dport 3128 -j ACCEPT
 
   # Transparent proxy : redirect all HTTP requests except those for the server
   # itself to port 3128
-  # $IPT -A PREROUTING -t nat -i $IFACE_LAN -p tcp ! -d 192.168.2.1 \
-  #               --dport 80 -j REDIRECT --to-port 3128
+  #$IPT -A PREROUTING -t nat -i $IFACE_LAN -p tcp ! -d 192.168.2.1 \
+  #   --dport 80 -j REDIRECT --to-port 3128
 
   # MPD 
   # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 8000 -j ACCEPT
