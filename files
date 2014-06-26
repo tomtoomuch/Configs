@@ -22,6 +22,9 @@
 # Services supplémentaires à lancer au démarrage
 /etc/rc.d/rc.local
 
+# Services supplémentaires à arrêter à l'extinction
+/etc/rc.d/rc.local_shutdown
+
 # Serveur DHCP
 /etc/dhcpd.conf
 /etc/rc.d/rc.dhcpd
@@ -36,8 +39,9 @@
 /var/named/*
 
 # Serveur Apache
-/etc/httpd.conf
+/etc/httpd/httpd.conf
 /etc/httpd/extra/httpd-vhosts.conf
+/etc/httpd/extra/httpd-ssl.conf
 /etc/rc.d/rc.httpd
 
 # Serveur MySQL

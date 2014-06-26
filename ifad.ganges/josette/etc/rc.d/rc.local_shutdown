@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# /etc/rc.d/rc.local_shutdown :  Local system shutdown script.
+#
+# Stop Squid server
+if [ -x /etc/rc.d/rc.squid ]; then
+  /etc/rc.d/rc.squid stop
+fi
+
