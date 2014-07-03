@@ -8,7 +8,7 @@
 # commands in there.
 
 # Start Squid server
-if [ -x /etc/rc.d/rc.squid ]; then
-  /etc/rc.d/rc.squid start
-fi
+#if [ -x /etc/rc.d/rc.squid ]; then
+#  /etc/rc.d/rc.squid start
+#fi
 
