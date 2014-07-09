@@ -1,5 +1,10 @@
-Modules Drupal installés sur le site de l'IFAD
+Core
+http://ftp.drupal.org/files/projects/drupal-7.28.tar.gz
 
+Traduction
+http://ftp.drupal.org/files/translations/7.x/drupal/drupal-7.28.fr.po
+
+Modules Drupal installés sur le site de l'IFAD
 http://ftp.drupal.org/files/projects/admin_menu-7.x-3.0-rc4.tar.gz /!\ Désactiver le module Toolbar de Drupal Core
 http://ftp.drupal.org/files/projects/ctools-7.x-1.4.tar.gz
 http://ftp.drupal.org/files/projects/backup_migrate-7.x-3.0.tar.gz
@@ -46,9 +51,9 @@ http://ftp.drupal.org/files/projects/location-7.x-3.3.tar.gz
 http://ftp.drupal.org/files/projects/gmap-7.x-2.9.tar.gz
 http://ftp.drupal.org/files/projects/better_exposed_filters-7.x-3.0-beta4.tar.gz
 
+Thèmes
 http://ftp.drupal.org/files/projects/skeletontheme-7.x-1.4.tar.gz
 http://ftp.drupal.org/files/projects/zeropoint-7.x-3.2.tar.gz
-
 
 
 
