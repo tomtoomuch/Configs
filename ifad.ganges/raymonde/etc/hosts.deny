@@ -8,5 +8,5 @@
 # Author:	Fred N. van Kempen, <waltje@uwalt.nl.mugnet.org
 #
 #
-
+ALL : ALL : spawn (echo +++ $(date) +++ Attempt from %a to %d >> /var/log/deny.log) 
 # End of hosts.deny.
