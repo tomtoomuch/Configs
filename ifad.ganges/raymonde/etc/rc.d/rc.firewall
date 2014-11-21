@@ -34,9 +34,9 @@ function start {
 
   # Limited SSH from the outside
   $IPT -A INPUT -p tcp -i $IFACE_INET --dport 22 -m state --state NEW \
-          -m recent --set --name SSH
+         -m recent --set --name SSH
   $IPT -A INPUT -p tcp -i $IFACE_INET --dport 22 -m state --state NEW \
-          -m recent --update --seconds 60 --hitcount 2 --rttl --name SSH -j DROP
+         -m recent --update --seconds 60 --hitcount 2 --rttl --name SSH -j DROP
   $IPT -A INPUT -p tcp -i $IFACE_INET --dport 22 -j ACCEPT
 
   # DNS 
@@ -77,13 +77,13 @@ function start {
   # $IPT -A INPUT -p udp -i $IFACE_LAN --dport 834 -j ACCEPT
 
   # Squid 
-  #$IPT -A INPUT -p tcp -i $IFACE_LAN --dport 3128 -j ACCEPT
-  #$IPT -A INPUT -p udp -i $IFACE_LAN --dport 3128 -j ACCEPT
+  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 3128 -j ACCEPT
+  $IPT -A INPUT -p udp -i $IFACE_LAN --dport 3128 -j ACCEPT
 
   # Transparent proxy : redirect all HTTP requests except those for the server
   # itself to port 3128
-  # $IPT -A PREROUTING -t nat -i $IFACE_LAN -p tcp ! -d 192.168.2.1 \
-  #               --dport 80 -j REDIRECT --to-port 3128
+  $IPT -A PREROUTING -t nat -i $IFACE_LAN -p tcp ! -d 192.168.2.1 \
+                 --dport 80 -j REDIRECT --to-port 3128
 
   # MPD 
   # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 8000 -j ACCEPT

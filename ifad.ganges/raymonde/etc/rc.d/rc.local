@@ -7,3 +7,7 @@
 # make an /etc/rc.d/rc.local_shutdown script and put those
 # commands in there.
 
+# Start Squid server
+if [ -x /etc/rc.d/rc.squid ]; then
+  /etc/rc.d/rc.squid start
+fi
