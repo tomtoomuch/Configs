@@ -13,7 +13,17 @@
 
 # For loopbacking.
 127.0.0.1	  	localhost.localdomain localhost
+# 192.168.1.*
 192.168.1.2		raymonde.ifad.ganges raymonde
+192.168.1.9   partages.ifad.ganges partages
+  # vhosts
+192.168.1.2   slackware.raymonde.ifad.ganges slackware.raymonde
+192.168.1.2   cloud.raymonde.ifad.ganges cloud.raymonde
+192.168.1.2   phpinfo.raymonde.ifad.ganges phpinfo.raymonde
+# 192.168.2.*
 192.168.2.1   raymonde.ifad.ganges raymonde
+192.168.2.1   slackware.raymonde.ifad.ganges slackware.raymonde
+192.168.2.1   cloud.raymonde.ifad.ganges cloud.raymonde
+192.168.2.1   phpinfo.raymonde.ifad.ganges phpinfo.raymonde
 # End of hosts.
 
