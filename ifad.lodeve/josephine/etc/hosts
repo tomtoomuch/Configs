@@ -10,7 +10,7 @@
 # should NEVER be named with the name of the machine.  It causes problems
 # for some (stupid) programs, irc and reputedly talk. :^)
 #
-
+192.168.2.1 josephine.ifad.lodeve josephine
 # For loopbacking.
 127.0.0.1		localhost
 127.0.0.1		josephine.ifad.lodeve josephine
