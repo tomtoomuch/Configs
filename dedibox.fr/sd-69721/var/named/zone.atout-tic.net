@@ -1,0 +1,22 @@
+; /var/named/zone.atout-tic.net
+$TTL 86400
+$ORIGIN atout-tic.net.
+@ IN SOA ns.atout-tic.net. hostmaster.atout-tic.net. (
+   2015020503   ; sn
+        10800   ; refresh (3 heures)
+          600   ; retry (10 minutes)
+      1814400   ; expiry (3 semaines)
+        10800 ) ; minimum (3 heures)
+        IN          NS      ns.atout-tic.net.
+        IN          NS      nssec.online.net.
+        IN          MX      10 mail.atout-tic.net.
+atout-tic.net.      A       195.154.77.231
+ns      IN          A       195.154.77.231
+mail    IN          A       195.154.77.231
+www                 CNAME   atout-tic.net.
+ftp                 CNAME   atout-tic.net.
+coop                CNAME   atout-tic.net.
+cloud               CNAME   atout-tic.net.
+gestion             CNAME   atout-tic.net.
+usehttps            CNAME   atout-tic.net.
+phpinfo             CNAME   atout-tic.net.
