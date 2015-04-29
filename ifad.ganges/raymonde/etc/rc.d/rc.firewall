@@ -47,18 +47,26 @@ function start {
   $IPT -A INPUT -p udp -i $IFACE_LAN --dport 67:68 -j ACCEPT
 
   # HTTP 
-  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 80 -j ACCEPT
+  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 80 -j ACCEPT
+  $IPT -A INPUT -p tcp -i $IFACE_INET --dport 80 -j ACCEPT
+  #$IPT -A INPUT -p tcp -i 192.168.1.* --dport 80 -j ACCEPT
+  #$IPT -A INPUT -p tcp -i 80.236.39.188 --dport 80 -j ACCEPT
 
   # HTTPS 
-  # $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 443 -j ACCEPT
+  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 443 -j ACCEPT
+  $IPT -A INPUT -p tcp -i $IFACE_INET --dport 443 -j ACCEPT
 
   # NTP 
   $IPT -A INPUT -p udp -i $IFACE_LAN --dport 123 -j ACCEPT
 
   # Samba 
- # $IPT -A INPUT -p udp -i $IFACE_LAN --dport 137:138 -j ACCEPT
-#  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 139 -j ACCEPT
-#  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 445 -j ACCEPT
+  $IPT -A INPUT -p udp -i $IFACE_LAN --dport 137:138 -j ACCEPT
+  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 139 -j ACCEPT
+  $IPT -A INPUT -p tcp -i $IFACE_LAN --dport 445 -j ACCEPT
+
+  $IPT -A INPUT -p udp -i 192.168.1.* --dport 137:138 -j ACCEPT
+  $IPT -A INPUT -p tcp -i 192.168.1.* --dport 139 -j ACCEPT
+  $IPT -A INPUT -p tcp -i 192.168.1.* --dport 445 -j ACCEPT
 
 
   # CUPS

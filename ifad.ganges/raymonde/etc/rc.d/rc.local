@@ -11,3 +11,8 @@
 if [ -x /etc/rc.d/rc.squid ]; then
   /etc/rc.d/rc.squid start
 fi
+
+# Start ClamAV
+if [ -x /etc/rc.d/rc.clamav ]; then
+  /etc/rc.d/rc.clamav start
+fi

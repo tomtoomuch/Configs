@@ -8,3 +8,8 @@
 if [ -x /etc/rc.d/rc.squid ]; then
   /etc/rc.d/rc.squid stop
 fi
+
+# Stop Clam AV
+if [ -x /etc/rc.d/rc.clamav ]; then
+  /etc/rc.d/rc.clamav stop
+fi

@@ -15,5 +15,5 @@ mountd  : 192.168.2.0/255.255.255.0 *.ifad.ganges : ALLOW
 vsftpd  : 127.0.0.1                               : ALLOW
 vsftpd  : 192.168.2.0/255.255.255.0 *.ifad.ganges : ALLOW
 vsftpd  : ALL                                     : ALLOW
-httpd   : 192.168.0.0/255.255.0.0 *.ifad.ganges   : ALLOW
+httpd   : 192.168.*.*/255.255.0.0                 : ALLOW
 # End of hosts.allow.
